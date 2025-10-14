@@ -8,7 +8,6 @@
 </head>
 <body>
 
-
   <div class="keys">
     <div data-key="65" class="key">
       <kbd>A</kbd>
@@ -48,7 +47,7 @@
     </div>
   </div>
 
-  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio id="2" data-key="65" src="sounds/clap.wav"></audio>
   <audio data-key="83" src="sounds/hihat.wav"></audio>
   <audio data-key="68" src="sounds/kick.wav"></audio>
   <audio data-key="70" src="sounds/openhat.wav"></audio>
@@ -59,6 +58,23 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  const keyPress = (event) => {
+    const a = document.querySelector(`audio[data-key="${event.keyCode}"]`);
+    const key= document.querySelector(`.key[data-key="${event.keyCode}"]`);
+    if(!a) return;
+    key.classList.add("playing");
+    a.currentTime = 0;
+    a.play();
+  }
+  window.addEventListener("keydown", keyPress);
+
+  function removeClass(e){
+    console.log(this.classList.remove("playing"));
+
+  };
+
+  const keys = document.querySelectorAll('.key');
+  keys.forEach(key => key.addEventListener("transitionend", removeClass));
 
 </script>
 
