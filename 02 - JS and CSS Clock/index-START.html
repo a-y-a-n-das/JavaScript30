@@ -10,9 +10,9 @@
 
     <div class="clock">
       <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+        <div id="24" class="hand hour-hand"></div>
+        <div id="60" class="hand min-hand"></div>
+        <div id="0" class="hand second-hand"></div>
       </div>
     </div>
 
@@ -63,12 +63,33 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.5s;
     }
 
-  </style>
-
+  </style>  
   <script>
+    const hH= document.getElementById("24");
+    const mM= document.getElementById("60");
+    const sS= document.getElementById("0");
+   
+    function currentTime(){
+      const now = new Date();
+      const h = now.getHours();
+      const m = now.getMinutes();
+      const s = now.getSeconds();
+      let hD = 90 + (h/12)*360;
+      let mD = 90 + (m/60)*360;
+      let sD = 90 + (s/60)*360;
+      console.log(mD);
+      hH.style.transform = `rotate(${hD}deg)`;
+      mM.style.transform = `rotate(${mD}deg)`;
+      sS.style.transform = `rotate(${sD}deg)`;
 
+    }
+
+    setInterval(currentTime, 1000)
 
   </script>
 </body>
